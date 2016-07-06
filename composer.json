@@ -8,7 +8,9 @@
             "homepage": "http://www.gforces.pl"
         }
     ],
-    "require": {},
+    "require-dev": {
+        "behat/behat": "dev-master"
+    },
     "autoload": {
         "psr-4": {
             "GForces\\Behat\\ContextAutoloaderExtension\\": "src/"
