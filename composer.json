@@ -1,0 +1,17 @@
+{
+    "name": "gforces/behat-context-autoloader",
+    "description": "Context autoloader extension for Behat",
+    "authors": [
+        {
+            "name": "Blazej Pachut",
+            "email": "blazej.pachut@gforces.pl",
+            "homepage": "http://www.gforces.pl"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "GForces\\Behat\\ContextAutoloaderExtension\\": "src/"
+        }
+    }
+}
