@@ -23,9 +23,9 @@ class Builder
         }
         $contexts = [];
         foreach ($contextsForLinking as $context) {
-            $reflection = new \ReflectionClass($context);
-            $contexts[] = [
-                'short' => $reflection->getShortName(),
+            $varName = $this->getContextVarName($context, $contexts);
+            $contexts[$varName] = [
+                'short' => $varName,
                 'full' => trim($context)
             ];
         }
@@ -34,6 +34,13 @@ class Builder
         $codeFile = $this->contextsPath . "/Container.php";
         file_put_contents($codeFile, $code);
         $this->containerHasBeenBuilt = true;
+    }
+
+    private function getContextVarName($context, array $contexts)
+    {
+        $reflection = new \ReflectionClass($context);
+        $name = $reflection->getShortName();
+        return isset($contexts[$name]) ? basename(str_replace('\\', DIRECTORY_SEPARATOR, $reflection->getNamespaceName())) . $name : $name;
     }
 
     private function renderTemplate($variables, $templateFile)
