@@ -44,7 +44,7 @@ class Builder
     private function getContextVarName($context, array $contexts)
     {
         $reflection = new \ReflectionClass($context);
-        $contextName = trim(str_replace($this->$mainNamespaces, '', $reflection->getNamespaceName()) . $reflection->getShortName(), '\\');
+        $contextName = trim(str_replace($this->mainNamespaces, '', $reflection->getNamespaceName()) . $reflection->getShortName(), '\\');
 
         return isset($contexts[$contextName])
             ? basename(str_replace('\\', DIRECTORY_SEPARATOR, $reflection->getNamespaceName())) . $contextName
