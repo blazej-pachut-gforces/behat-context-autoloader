@@ -5,7 +5,7 @@ namespace GForces\Behat\ContextAutoloaderExtension\Code;
 class Builder
 {
     private $contextsPath;
-
+    private $mainNamespaces = [];
     private $containerHasBeenBuilt = false;
 
     /**
@@ -14,6 +14,11 @@ class Builder
     public function setContextsPath($contextsPath)
     {
         $this->contextsPath = $contextsPath;
+    }
+
+    public function setMainNamespaces(array $namespaces)
+    {
+        $this->mainNamespaces = $namespaces;
     }
 
     public function buildContextContainer($contextsForLinking)
@@ -39,8 +44,11 @@ class Builder
     private function getContextVarName($context, array $contexts)
     {
         $reflection = new \ReflectionClass($context);
-        $name = $reflection->getShortName();
-        return isset($contexts[$name]) ? basename(str_replace('\\', DIRECTORY_SEPARATOR, $reflection->getNamespaceName())) . $name : $name;
+        $contextName = trim(str_replace($this->$mainNamespaces, '', $reflection->getNamespaceName()) . $reflection->getShortName(), '\\');
+
+        return isset($contexts[$contextName])
+            ? basename(str_replace('\\', DIRECTORY_SEPARATOR, $reflection->getNamespaceName())) . $contextName
+            : $contextName;
     }
 
     private function renderTemplate($variables, $templateFile)

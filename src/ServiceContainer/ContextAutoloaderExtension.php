@@ -71,10 +71,15 @@ class ContextAutoloaderExtension implements Extension
      */
     public function configure(ArrayNodeDefinition $builder)
     {
-        $builder->children()
-            ->scalarNode('contexts_path')
-            ->defaultNull()
-        ->end();
+        $builder
+            ->children()
+                ->scalarNode('contexts_path')
+                    ->defaultNull()
+                ->end()
+                ->arrayNode('main_namespaces')
+                    ->prototype('scalar')->end()
+                ->end()
+            ->end();
     }
 
     /**
@@ -137,6 +142,7 @@ class ContextAutoloaderExtension implements Extension
     {
         $builderDefinition = new Definition(Builder::class);
         $builderDefinition->addMethodCall('setContextsPath', [$config['contexts_path']]);
+        $builderDefinition->addMethodCall('setMainNamespaces', [$config['main_namespaces']]);
         $container->setDefinition(self::BUILDER_ID, $builderDefinition);
     }
 }
