@@ -16,6 +16,8 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 
 class Container
 {
+    /** @var behat\Context\FeatureContext */
+    public $featureContext;
     <?php foreach ($contexts as $context): ?>
 /** @var \<?= $context['full'] ?> */
     public $<?= lcfirst($context['short']) ?>;
@@ -25,6 +27,7 @@ class Container
     {
         /** @var InitializedContextEnvironment $environment */
         $environment = $scope->getEnvironment();
+        $this->featureContext = $environment->getContext(behat\Context\FeatureContext::class);
 <?php foreach ($contexts as $context): ?>
         $this-><?= lcfirst($context['short']) ?> = $environment->getContext('<?= $context['full'] ?>');
 <?php endforeach ?>    }

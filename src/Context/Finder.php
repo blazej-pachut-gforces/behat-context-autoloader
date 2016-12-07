@@ -46,6 +46,7 @@ class Finder
             ->in($this->contextsPath)
             ->notContains('abstract class')
             ->notContains('class BaseContext')
+            ->notContains('class FeatureContext')
             ->notContains('class Container')
             ->notContains('/trait .*/')
             ->name('*.php');
