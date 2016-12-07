@@ -16,7 +16,7 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 
 class Container
 {
-    /** @var behat\Context\FeatureContext */
+    /** @var \behat\Context\FeatureContext */
     public $featureContext;
     <?php foreach ($contexts as $context): ?>
 /** @var \<?= $context['full'] ?> */
