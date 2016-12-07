@@ -27,7 +27,7 @@ class Container
     {
         /** @var InitializedContextEnvironment $environment */
         $environment = $scope->getEnvironment();
-        $this->featureContext = $environment->getContext(behat\Context\FeatureContext::class);
+        $this->featureContext = $environment->getContext(\behat\Context\FeatureContext::class);
 <?php foreach ($contexts as $context): ?>
         $this-><?= lcfirst($context['short']) ?> = $environment->getContext('<?= $context['full'] ?>');
 <?php endforeach ?>    }
