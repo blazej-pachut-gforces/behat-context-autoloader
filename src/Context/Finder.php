@@ -49,7 +49,8 @@ class Finder
             ->notContains('class FeatureContext')
             ->notContains('class Container')
             ->notContains('/trait .*/')
-            ->name('*.php');
+            ->name('*.php')
+            ->sortByName();
         foreach ($this->finder as $foundContextFile) {
             $source = file_get_contents($foundContextFile);
             if ($foundClass = $this->parser->getClassFromSource($source)) {
